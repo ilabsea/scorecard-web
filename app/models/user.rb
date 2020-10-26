@@ -82,6 +82,10 @@ class User < ApplicationRecord
     pending_any_confirmation { yield }
   end
 
+  def display_name
+    email.split('@').first.upcase
+  end
+
   protected
     def password_required?
       confirmed? ? super : false
