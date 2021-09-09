@@ -21,6 +21,7 @@ class LocalNgo < ApplicationRecord
   belongs_to :program
   has_many :cafs
   has_many :scorecards
+  has_many :users
 
   validates :name, presence: true, uniqueness: { scope: :program_id }
 

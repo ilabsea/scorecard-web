@@ -4,8 +4,8 @@ require_relative "scorecard_criteria"
 
 module ScorecardCriteria
   class RatingScale < ::ScorecardCriteria::Base
-    def self.load
-      program = ::Program.find_by name: "CARE"
+    def self.load(program_name="CARE")
+      program = ::Program.find_by name: program_name
       return if program.nil?
 
       xlsx = Roo::Spreadsheet.open(file_path("indicator.xlsx"))
@@ -20,7 +20,7 @@ module ScorecardCriteria
     private
       def self.upsert_rating_scales(program, rows)
         rows[1..-1].each_with_index do |row, index|
-          rating = ::RatingScale.defaults.select { |rs| rs[:value] == row["No"].to_s }[0]
+          rating = ::RatingScale.defaults.select { |rs| rs[:value] == row["No"].to_i.to_s }[0]
 
           next unless rating.present?
 
