@@ -4,7 +4,12 @@ class ScorecardsController < ApplicationController
   before_action :set_scorecard, only: [:show, :edit, :update, :destroy]
 
   def index
-    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)))
+    @pagy, @scorecards = pagy(policy_scope(Scorecard.filter(filter_params).order(sort_column + " " + sort_direction).includes(:facility, :local_ngo)), link_extra: 'data-remote="true"')
+    
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -74,8 +79,8 @@ class ScorecardsController < ApplicationController
 
     def filter_params
       params.permit(
-        :start_date, :facility_id, :uuid, :filter,
-        :year, :province_id, :local_ngo_id
+        :start_date, :filter,
+        facility_id: [], year: [], local_ngo_id: [], province_id: [], uuid: []
       ).merge(program_id: current_user.program_id)
     end
 end

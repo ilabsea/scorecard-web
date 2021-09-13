@@ -28,6 +28,7 @@
 //= require templates
 //= require indicators
 //= require scorecards/datepicker_popup
+//= require scorecards/filter_options
 //= require scorecards/index
 //= require scorecards/show
 //= require scorecards/new
@@ -44,7 +45,7 @@
 //= require programs/new
 //= require mobile_notifications
 
-document.addEventListener('turbolinks:load', function() {
+document.addEventListener("turbolinks:load", function () {
   CW.Common.Topbar.init();
   CW.Common.DatetimePicker.init();
   CW.Common.Timeago.init();
@@ -54,4 +55,4 @@ document.addEventListener('turbolinks:load', function() {
 
   let currentPage = CW.Util.getCurrentPage();
   !!CW[currentPage] && CW[currentPage].init();
-})
+});
