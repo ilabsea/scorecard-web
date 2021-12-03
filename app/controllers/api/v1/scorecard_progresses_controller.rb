@@ -16,7 +16,7 @@ module Api
       private
         def scorecard_progress_params
           params.require(:scorecard_progress).permit(
-            :scorecard_uuid, :status, :device_id
+            :scorecard_uuid, :status, :device_id, :device_type
           ).merge(user_id: current_user.id)
         end
     end

@@ -11,6 +11,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :integer
+#  device_type    :string
 #
 class ScorecardProgress < ApplicationRecord
   belongs_to :scorecard, primary_key: "uuid", foreign_key: "scorecard_uuid"

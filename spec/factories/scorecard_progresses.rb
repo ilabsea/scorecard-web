@@ -11,6 +11,7 @@
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :integer
+#  device_type    :string
 #
 FactoryBot.define do
   factory :scorecard_progress do
