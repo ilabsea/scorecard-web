@@ -4,7 +4,7 @@
 #
 # Table name: raised_indicators
 #
-#  id                 :bigint           not null, primary key
+#  integer_id         :bigint           not null
 #  indicatorable_id   :integer
 #  indicatorable_type :string
 #  scorecard_uuid     :string
@@ -12,6 +12,8 @@
 #  updated_at         :datetime         not null
 #  tag_id             :integer
 #  participant_uuid   :string
+#  id                 :uuid             not null, primary key
+#  selected           :boolean          default(FALSE)
 #
 FactoryBot.define do
   factory :raised_indicator do

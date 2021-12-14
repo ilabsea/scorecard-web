@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_063029) do
+ActiveRecord::Schema.define(version: 2021_12_14_092141) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -339,7 +339,8 @@ ActiveRecord::Schema.define(version: 2021_12_13_063029) do
     t.string "dashboard_user_roles", default: [], array: true
   end
 
-  create_table "raised_indicators", force: :cascade do |t|
+  create_table "raised_indicators", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.bigint "integer_id", default: -> { "nextval('raised_indicators_id_seq'::regclass)" }, null: false
     t.integer "indicatorable_id"
     t.string "indicatorable_type"
     t.string "scorecard_uuid"
@@ -347,6 +348,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_063029) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tag_id"
     t.string "participant_uuid"
+    t.boolean "selected", default: false
   end
 
   create_table "rating_scales", force: :cascade do |t|
@@ -533,6 +535,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_063029) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "display_order"
+    t.string "raised_indicator_id"
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"
