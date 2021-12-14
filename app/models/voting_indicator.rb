@@ -4,21 +4,23 @@
 #
 # Table name: voting_indicators
 #
-#  indicatorable_id   :integer
-#  indicatorable_type :string
-#  scorecard_uuid     :string
-#  median             :integer
-#  strength           :text
-#  weakness           :text
-#  suggested_action   :text
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  uuid               :string           default("uuid_generate_v4()"), not null, primary key
-#  display_order      :integer
+#  indicatorable_id    :integer
+#  indicatorable_type  :string
+#  scorecard_uuid      :string
+#  median              :integer
+#  strength            :text
+#  weakness            :text
+#  suggested_action    :text
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  uuid                :string           default("uuid_generate_v4()"), not null, primary key
+#  display_order       :integer
+#  raised_indicator_id :string
 #
 class VotingIndicator < ApplicationRecord
   belongs_to :scorecard, foreign_key: :scorecard_uuid, optional: true
   belongs_to :indicatorable, polymorphic: true
+  belongs_to :raised_indicator, optional: true
   has_many :ratings, foreign_key: :voting_indicator_uuid, dependent: :destroy
   has_many :suggested_actions, foreign_key: :voting_indicator_uuid, dependent: :destroy
 
